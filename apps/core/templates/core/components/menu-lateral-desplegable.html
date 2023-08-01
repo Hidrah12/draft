@@ -1,0 +1,44 @@
+{% load static %}
+<div class="h-[100vh] bg-[#f5f5f5] w-[300px]">
+    <ul class="flex items-center justify-between px-3 py-2 bg-[#f1f1f1d8]">
+        <li>
+            <a href="{% url 'core:index' %}" class="flex items-center space-x-2">
+                <img src="{% static 'img/draft-logo.png' %}" alt="Draft logo" class="w-12">
+                <span class="font-medium">Draft</span>
+            </a>
+        </li>
+    </ul>
+    <div class="px-5 py-3">
+        <h2 class="text-lg font-medium mb-2">Filtrar por:</h2>
+        <h3 class="text-sm font-medium my-3">Categoría <i class="fa-solid fa-tags"></i></h3>
+        <ul class="pl-3 max-h-[300px] relative overflow-y-auto">
+            <li class="my-1"><a href="#" class="block p-2 rounded-md hover:bg-cyan-500/60 transition-colors">Categoría
+                    1</a></li>
+        </ul>
+        <hr class="my-5">
+        <h3 class="text-sm font-medium my-3">Fecha <i class="fa-solid fa-clock"></i></h3>
+        <ul class="pl-3">
+            <label for="30dias" class="block my-2">
+                <input type="radio" name="fecha" id="30dias" value="1" class="scale-125">
+                Últimos 30 días
+            </label>
+
+            <label for="15dias" class="block my-2">
+                <input type="radio" name="fecha" id="15dias" value="2" class="scale-125">
+                Últimos 15 días
+            </label>
+
+            <label for="5dias" class="block my-2">
+                <input type="radio" name="fecha" id="5dias" value="3" class="scale-125">
+                Últimos 5 días
+            </label>
+            <label for="all" class="block my-2">
+                <input type="radio" name="fecha" id="all" class="scale-125" value="4" checked>
+                Mostrar todo
+            </label>
+        </ul>
+        <hr class="my-5">
+        <h3 class="text-sm font-medium my-3">Importante <i class="fa-solid fa-circle-exclamation"></i> <input
+                type="checkbox" name="" id="" class="float-right scale-125"></h3>
+    </div>
+</div>
