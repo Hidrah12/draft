@@ -17,7 +17,7 @@ BASE_APPS = [
 ]
 
 LOCAL_APPS = [
-
+    'apps.core',
 ]
 
 THIRD_APPS = [
