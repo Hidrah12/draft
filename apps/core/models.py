@@ -19,7 +19,7 @@ class CustomerUser(AbstractUser):
     )
 
     def __str__(self):
-        return f'{self.pk}, {self.username}'
+        return f'{self.username}'
 
     class Meta:
         verbose_name = 'personalización de usuario'
