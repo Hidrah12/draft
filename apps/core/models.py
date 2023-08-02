@@ -41,7 +41,7 @@ class Tag(models.Model):
 class Task(models.Model):
     user = models.ForeignKey(CustomerUser, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
     tag = models.ManyToManyField(Tag)
     important = models.BooleanField(default=False)
     done = models.BooleanField(default=False)
