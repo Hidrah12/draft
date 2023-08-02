@@ -8,19 +8,17 @@ Draft
 
 {% block content %}
 <main class="flex flex-wrap p-5">
-
     {% for task in tasks %}
-    <div class="w-[350px] shadow-md rounded-lg px-8 py-4 mx-3 my-3">
+    <div
+        class="targetTask w-[350px] shadow-md rounded-lg px-8 py-4 mx-3 my-3 cursor-pointer hover:bg-[#f3f3f3] transition-colors">
         <div>
             {% for tag in task.tags.all %}
             <a href="#" class="text-xs font-medium px-3 py-2 rounded-3xl bg-purple-800 text-white">{{tag.name}}</a>
             {% endfor %}
-            <button id="btnShowDetails" class="float-right"><i class="fa-solid fa-ellipsis"></i></button>
         </div>
         <h3 class="text-lg font-semibold my-5 text-slate-700">{{task.title}}</h3>
         <p>{{task.description}}</p>
     </div>
     {% endfor %}
-
 </main>
 {% endblock content %}
