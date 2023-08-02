@@ -88,4 +88,4 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'core.CustomerUser'
+AUTH_USER_MODEL = 'core.UserApp'

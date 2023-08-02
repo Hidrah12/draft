@@ -5,7 +5,7 @@ from .models import Task
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ['title', 'description', 'tag', 'important']
+        fields = ['title', 'description', 'tags', 'important']
 
     def __init__(self, *args, **kwargs):
         super(TaskForm, self).__init__(*args, **kwargs)
@@ -15,7 +15,7 @@ class TaskForm(forms.ModelForm):
         self.fields['description'].widget.attrs.update({
             'placeholder': 'Description'
         })
-        self.fields['tag'].help_text = '*Add your tag'
-        self.fields['tag'].widget.attrs.update({
+        self.fields['tags'].help_text = '*Add your tag'
+        self.fields['tags'].widget.attrs.update({
             'title': 'Select a label'
         })
