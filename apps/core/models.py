@@ -26,7 +26,7 @@ class CustomerUser(AbstractUser):
         verbose_name_plural = 'personalización de usuarios'
 
 
-class Category(models.Model):
+class Tag(models.Model):
     name = models.CharField(max_length=200)
     create_on = models.DateTimeField(auto_now_add=True)
 
@@ -34,15 +34,15 @@ class Category(models.Model):
         return f'{self.pk}, {self.name}'
 
     class Meta:
-        verbose_name = 'categoría'
-        verbose_name_plural = 'categorías'
+        verbose_name = 'etiqueta'
+        verbose_name_plural = 'etiquetas'
 
 
 class Task(models.Model):
     user = models.ForeignKey(CustomerUser, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     description = models.TextField()
-    categories = models.ManyToManyField(Category)
+    tag = models.ManyToManyField(Tag)
     important = models.BooleanField(default=False)
     done = models.BooleanField(default=False)
     created_on = models.DateTimeField(auto_now_add=True)
