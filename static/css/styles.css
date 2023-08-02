@@ -2,7 +2,8 @@
 * {
     font-family: 'Roboto', sans-serif;
 }
-#sidePanel {
+.sidePanel {
+    left: -300px;
     transition: all 0.3s;
 }
 .active-side-panel {

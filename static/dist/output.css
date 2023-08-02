@@ -619,6 +619,10 @@ video {
   height: 600px;
 }
 
+.h-\[100vh\] {
+  height: 100vh;
+}
+
 .w-11 {
   width: 2.75rem;
 }
@@ -770,6 +774,11 @@ video {
 
 .bg-slate-200\/40 {
   background-color: rgb(226 232 240 / 0.4);
+}
+
+.bg-slate-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(226 232 240 / var(--tw-bg-opacity));
 }
 
 .p-3 {

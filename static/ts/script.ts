@@ -1,13 +1,15 @@
 let buttonShowSidePanel = document.getElementById('btnShowSidePanel')
 buttonShowSidePanel?.addEventListener('click', (e) => {
-    let sidePanel = document.getElementById('sidePanel') as HTMLDivElement | null
+    let sidePanel = document.getElementsByClassName('sidePanel')
     if (sidePanel) {
-        if (sidePanel.classList.toString().includes('active-side-panel')){
-            sidePanel.classList.remove('active-side-panel')
-        } else {
-            sidePanel.classList.add('active-side-panel')
-        } 
-}
+        Array.from(sidePanel).map(panel => {
+            if (panel.classList.toString().includes('active-side-panel')) {
+                panel.classList.remove('active-side-panel')
+            } else {
+                panel.classList.add('active-side-panel')
+            }
+        })
+    }
     e.preventDefault()
 })
 let btnCreateTask = document.getElementById('btnCreateTask')
