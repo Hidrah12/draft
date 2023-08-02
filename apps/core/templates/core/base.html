@@ -20,11 +20,16 @@
 </head>
 
 <body>
+    <!-- Header -> Navbar -->
     <header>
         {% include 'core/components/navbar.html' %}
     </header>
-    {% include 'core/components/side-panel.html' %}
 
+    <!-- SidePanel and TaskPanel -->
+    {% include 'core/components/sidePanel.html' %}
+    {% include 'core/components/taskPanel.html' %}
+
+    <!-- Main content -->
     {% block content %}
 
     {% endblock content %}
