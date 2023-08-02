@@ -23,7 +23,10 @@ LOCAL_APPS = [
 
 THIRD_APPS = [
     'rest_framework',
+    'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 INSTALLED_APPS = BASE_APPS + LOCAL_APPS + THIRD_APPS
 
