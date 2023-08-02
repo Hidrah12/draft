@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from .forms import TaskForm
-from .models import Task
+from .models import Task, UserApp
 
 
 def index(request):
@@ -12,19 +12,18 @@ def index(request):
                 checked = True
             else:
                 checked = False
-            get_user = CustomerUser.objects.get(username=request.user.username)
-            new_task = Task(
-                user=get_user,
+            task = Task.objects.create(
+                user=request.user,
                 title=request.POST['title'],
                 description=request.POST['description'],
-                important=checked,
+                important=checked
             )
-            new_task.save()
-            for i in request.POST['tags']:
-                tag = Tag.objects.get(id=i)
-                print(tag)
-                new_task.tags.add(tag)
-            return redirect('core:index')
+            task.save()
+            for pk in request.POST.getlist('tags'):
+                tag = Tag.objects.get(id=pk)
+                task.tags.add(tag)
+            task.save()
+        return redirect('core:index-url')
     else:
         task_form = TaskForm()
         tasks = Task.objects.all().order_by('-id')

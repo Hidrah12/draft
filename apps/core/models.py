@@ -19,7 +19,8 @@ class Tag(models.Model):
 
 
 class Task(models.Model):
-    user = models.ForeignKey(UserApp, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        UserApp, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
     tags = models.ManyToManyField(Tag)
