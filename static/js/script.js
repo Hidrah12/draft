@@ -2,7 +2,6 @@
 let buttonShowSidePanel = document.getElementById('btnShowSidePanel');
 buttonShowSidePanel === null || buttonShowSidePanel === void 0 ? void 0 : buttonShowSidePanel.addEventListener('click', (e) => {
     let sidePanel = document.getElementsByClassName('sidePanel');
-    console.log(sidePanel);
     if (sidePanel) {
         Array.from(sidePanel).map(panel => {
             if (panel.classList.toString().includes('active-side-panel')) {
