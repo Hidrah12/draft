@@ -2,3 +2,10 @@
 * {
     font-family: 'Roboto', sans-serif;
 }
+#sidePanel {
+    transition: all 0.3s;
+}
+.active-side-panel {
+    left: 0;
+    transition: left 0.3s;
+}
