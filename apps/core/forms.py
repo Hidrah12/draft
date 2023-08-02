@@ -6,6 +6,16 @@ class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ['title', 'description', 'tag', 'important']
-        labels = {
-            'title': 'Title'
-        }
+
+    def __init__(self, *args, **kwargs):
+        super(TaskForm, self).__init__(*args, **kwargs)
+        self.fields['title'].widget.attrs.update({
+            'placeholder': 'Task name here...'
+        })
+        self.fields['description'].widget.attrs.update({
+            'placeholder': 'Description'
+        })
+        self.fields['tag'].help_text = '*Add your tag'
+        self.fields['tag'].widget.attrs.update({
+            'title': 'Select a label'
+        })

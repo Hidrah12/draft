@@ -31,7 +31,7 @@ class Tag(models.Model):
     create_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.pk}, {self.name}'
+        return f'{self.name}'
 
     class Meta:
         verbose_name = 'etiqueta'
@@ -49,7 +49,7 @@ class Task(models.Model):
     modified_on = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'{self.pk}, {self.title}'
+        return f'{self.title}'
 
     class Meta:
         verbose_name = 'tarea'
