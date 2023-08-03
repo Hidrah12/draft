@@ -9,15 +9,18 @@ Draft
 {% block content %}
 <main class="flex flex-wrap p-5">
     {% for task in tasks %}
-    <div
-        class="targetTask w-[350px] shadow-md rounded-lg px-8 py-4 mx-3 my-3 cursor-pointer hover:bg-[#f3f3f3] transition-colors">
+    <div class="w-[350px] border-[1px] shadow-md rounded-lg px-8 py-4 mx-3 my-3">
         <div>
             {% for tag in task.tags.all %}
-            <a href="#" class="text-xs font-medium px-3 py-2 rounded-3xl bg-purple-800 text-white">{{tag.name}}</a>
+            <a href="#" class="text-[10px] font-medium px-3 py-2 rounded-full bg-purple-800 text-white">{{tag.name}}</a>
             {% endfor %}
+            <button data-tippy-content="Edit task" class="btnEditTask float-right text-slate-700"><i
+                    class="fa-solid fa-pen-to-square"></i></button>
+            <button data-tippy-content="Delete Task" class="float-right mr-3 text-slate-700"><i
+                    class="fa-solid fa-trash"></i></button>
         </div>
         <h3 class="text-lg font-semibold my-5 text-slate-700">{{task.title}}</h3>
-        <p>{{task.description}}</p>
+        <p class="text-sm">{{task.description}}</p>
     </div>
     {% endfor %}
 </main>

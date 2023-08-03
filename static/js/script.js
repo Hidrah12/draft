@@ -37,9 +37,9 @@ btnCloseTaskPanel === null || btnCloseTaskPanel === void 0 ? void 0 : btnCloseTa
     }
     e.preventDefault();
 });
-let targetTask = document.getElementsByClassName('targetTask');
-Array.from(targetTask).map(task => {
-    task.addEventListener('click', e => {
+let btnEditTask = document.getElementsByClassName('btnEditTask');
+Array.from(btnEditTask).map(btn => {
+    btn.addEventListener('click', e => {
         let createTaskPanel = document.getElementById('taskPanel');
         if (createTaskPanel) {
             if (createTaskPanel.classList.toString().includes('invisible')) {

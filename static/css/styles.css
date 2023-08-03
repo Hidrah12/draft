@@ -29,6 +29,7 @@
     outline: none;
     border-radius: 8px;
     margin: 15px 0;
+    background-color: #f7f7f7;
 }
 .form-create-task textarea {
     width: 100%;
@@ -36,6 +37,7 @@
     border-radius: 8px;
     height: 150px;
     padding: 8px;
+    background-color: #f7f7f7;
 }
 .form-create-task select {
     width: 100%;
@@ -43,6 +45,7 @@
     padding: 8px;
     border-radius: 8px;
     margin-top: 15px ;
+    background-color: #f7f7f7;
 }
 .form-create-task select > option {
     margin: 3px;
