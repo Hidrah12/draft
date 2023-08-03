@@ -16,8 +16,10 @@ Draft
             {% endfor %}
             <button data-tippy-content="Edit task" class="btnEditTask float-right text-slate-700"><i
                     class="fa-solid fa-pen-to-square"></i></button>
-            <button data-tippy-content="Delete Task" class="float-right mr-3 text-slate-700"><i
-                    class="fa-solid fa-trash"></i></button>
+            <form action="" method="post" class="inline-block float-right">
+                <button data-tippy-content="Delete Task" class="mr-3 text-slate-700"><i
+                        class="fa-solid fa-trash"></i></button>
+            </form>
         </div>
         <h3 class="text-lg font-semibold my-5 text-slate-700">{{task.title}}</h3>
         <p class="text-sm">{{task.description}}</p>
