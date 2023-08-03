@@ -4,7 +4,7 @@ from .forms import TaskForm
 from .models import Task, UserApp
 
 
-def index(request):
+def index_view(request):
     if request.method == 'POST':
         task_form = TaskForm(request.POST)
         if task_form.is_valid():
@@ -26,11 +26,10 @@ def index(request):
         return redirect('core:index-url')
     else:
         task_form = TaskForm()
-        tasks = Task.objects.all().order_by('-id')
+    return render(request, 'core/index.html', {'task_form': task_form})
 
-    return render(request, 'core/index.html', {'task_form': task_form, 'tasks': tasks})
 
-def delete_task(request, id):
+def delete_task_view(request, id):
     task = Task.objects.filter(id=id).first()
     if task:
         task.delete()

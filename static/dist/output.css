@@ -614,6 +614,10 @@ video {
   width: 2.75rem;
 }
 
+.w-\[100\%\] {
+  width: 100%;
+}
+
 .w-\[1px\] {
   width: 1px;
 }

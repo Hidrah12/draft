@@ -53,22 +53,39 @@ Array.from(btnEditTask).map(btn => {
 
 let btnDoneTask = document.getElementsByClassName("btnDoneTask");
 Array.from(btnDoneTask).map((btn) => {
-  btn.addEventListener("click", (e) => {
-    let taskTitle = document.getElementById(
-      `title_${btn.getAttribute("data-btn-id")}`
-    );
-    if (taskTitle) {
-      taskTitle.classList.add("line-through");
-      setInterval(function () {
-        let task = document.getElementById(
-          `task_${btn.getAttribute("data-btn-id")}`
-        );
-        if (task) {
-          task.remove();
-        }
-      }, 5000);
-    }
-    e.preventDefault();
-  });
-});
+    btn.addEventListener("click", (e) => {
+        let id = btn.getAttribute("data-btn-id")
+        let tokken = document.querySelector("input[name='csrfmiddlewaretoken']") as HTMLInputElement | null
 
+        let taskTitle = document.getElementById(`title_${id}`);
+        if (taskTitle) {
+            taskTitle.classList.add("line-through");
+            setInterval(function () {
+                let task = document.getElementById(`task_${id}`);
+                if (task) {
+                    task.remove();
+                    if (tokken) {
+                        fetch(`/api/task/${id}/`, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRFToken': tokken.value,
+                            },
+                            body: JSON.stringify(
+                                {
+                                    done: true,
+                                }
+                            )
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data)
+                        })    
+                    }
+                }
+                location.reload()
+            }, 5000);
+        }
+        e.preventDefault();
+    });
+});

@@ -1,14 +1,13 @@
 {% extends 'core/base.html' %}
 
-
 {% block title %}
 Draft
 {% endblock title %}
-
-
 {% block content %}
 <main class="flex flex-wrap p-5">
     {% for task in tasks %}
+    <!-- Si no hay tareas completas -->
+    {% if not task.done is True %}
     <div id="task_{{task.id}}" class="w-[350px] border-[1px] shadow-md rounded-lg px-8 py-4 mx-3 my-3">
         <div>
             {% for tag in task.tags.all %}
@@ -30,6 +29,12 @@ Draft
         <h3 id="title_{{task.id}}" class="text-lg font-semibold my-5 text-slate-700">{{task.title}}</h3>
         <p class="text-sm">{{task.description}}</p>
     </div>
+    {% endif %}
     {% endfor %}
+    <!-- Si hay tareas completas. -->
+    {% if task_done %}
+    <p>Hola</p>
+    {% include 'core/tasks_done.html' %}
+    {% endif %}
 </main>
 {% endblock content %}
