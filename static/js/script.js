@@ -1,4 +1,5 @@
 "use strict";
+const createTaskPanel = document.getElementById('taskPanel');
 let buttonShowSidePanel = document.getElementById('btnShowSidePanel');
 buttonShowSidePanel === null || buttonShowSidePanel === void 0 ? void 0 : buttonShowSidePanel.addEventListener('click', (e) => {
     let sidePanel = document.getElementsByClassName('sidePanel');
@@ -14,22 +15,22 @@ buttonShowSidePanel === null || buttonShowSidePanel === void 0 ? void 0 : button
     }
     e.preventDefault();
 });
-let btnCreateTask = document.getElementById('btnCreateTask');
-btnCreateTask === null || btnCreateTask === void 0 ? void 0 : btnCreateTask.addEventListener('click', (e) => {
-    let createTaskPanel = document.getElementById('taskPanel');
-    if (createTaskPanel) {
-        if (createTaskPanel.classList.toString().includes('invisible')) {
-            createTaskPanel.classList.replace('invisible', 'visible');
+let btnCreateTask = document.getElementsByClassName('btnCreateTask');
+Array.from(btnCreateTask).map(btn => {
+    btn === null || btn === void 0 ? void 0 : btn.addEventListener('click', (e) => {
+        if (createTaskPanel) {
+            if (createTaskPanel.classList.toString().includes('invisible')) {
+                createTaskPanel.classList.replace('invisible', 'visible');
+            }
+            else {
+                createTaskPanel.classList.add('invisible');
+            }
         }
-        else {
-            createTaskPanel.classList.add('invisible');
-        }
-    }
-    e.preventDefault();
+        e.preventDefault();
+    });
 });
 let btnCloseTaskPanel = document.getElementById('btnCloseTaskPanel');
 btnCloseTaskPanel === null || btnCloseTaskPanel === void 0 ? void 0 : btnCloseTaskPanel.addEventListener('click', e => {
-    let createTaskPanel = document.getElementById('taskPanel');
     if (createTaskPanel) {
         if (createTaskPanel.classList.toString().includes('visible')) {
             createTaskPanel.classList.replace('visible', 'invisible');
@@ -40,7 +41,6 @@ btnCloseTaskPanel === null || btnCloseTaskPanel === void 0 ? void 0 : btnCloseTa
 let btnEditTask = document.getElementsByClassName('btnEditTask');
 Array.from(btnEditTask).map(btn => {
     btn.addEventListener('click', e => {
-        let createTaskPanel = document.getElementById('taskPanel');
         if (createTaskPanel) {
             if (createTaskPanel.classList.toString().includes('invisible')) {
                 createTaskPanel.classList.replace('invisible', 'visible');
@@ -52,37 +52,46 @@ Array.from(btnEditTask).map(btn => {
         e.preventDefault();
     });
 });
+function updateTaskData(token, id) {
+    setInterval(function () {
+        let task = document.getElementById(`task_${id}`);
+        if (task) {
+            task.remove();
+            if (token) {
+                fetch(`/api/task/update/${id}/`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': token,
+                    },
+                    body: JSON.stringify({
+                        done: true,
+                    })
+                })
+                    .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Error en la solucitud PUT");
+                    }
+                    return response.json();
+                })
+                    .catch(err => {
+                    console.error("Error: ", err);
+                });
+            }
+        }
+        location.reload();
+    }, 5000);
+}
 let btnDoneTask = document.getElementsByClassName("btnDoneTask");
 Array.from(btnDoneTask).map((btn) => {
     btn.addEventListener("click", (e) => {
         let id = btn.getAttribute("data-btn-id");
-        let tokken = document.querySelector("input[name='csrfmiddlewaretoken']");
+        let inputElement = document.querySelector("input[name='csrfmiddlewaretoken']");
+        let token = inputElement === null || inputElement === void 0 ? void 0 : inputElement.value;
         let taskTitle = document.getElementById(`title_${id}`);
-        if (taskTitle) {
+        if (taskTitle && token && id) {
             taskTitle.classList.add("line-through");
-            setInterval(function () {
-                let task = document.getElementById(`task_${id}`);
-                if (task) {
-                    task.remove();
-                    if (tokken) {
-                        fetch(`/api/task/${id}/`, {
-                            method: 'PUT',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRFToken': tokken.value,
-                            },
-                            body: JSON.stringify({
-                                done: true,
-                            })
-                        })
-                            .then(response => response.json())
-                            .then(data => {
-                            console.log(data);
-                        });
-                    }
-                }
-                location.reload();
-            }, 5000);
+            updateTaskData(token, id);
         }
         e.preventDefault();
     });
