@@ -9,19 +9,25 @@ Draft
 {% block content %}
 <main class="flex flex-wrap p-5">
     {% for task in tasks %}
-    <div class="w-[350px] border-[1px] shadow-md rounded-lg px-8 py-4 mx-3 my-3">
+    <div id="task_{{task.id}}" class="w-[350px] border-[1px] shadow-md rounded-lg px-8 py-4 mx-3 my-3">
         <div>
             {% for tag in task.tags.all %}
-            <a href="#" class="text-[10px] font-medium px-3 py-2 rounded-full bg-purple-800 text-white">{{tag.name}}</a>
+            <a href="#" class="text-[8px] font-medium px-3 py-2 rounded-full bg-purple-800 text-white">{{tag.name}}</a>
             {% endfor %}
-            <button data-tippy-content="Edit task" class="btnEditTask float-right text-slate-700"><i
-                    class="fa-solid fa-pen-to-square"></i></button>
-            <form action="" method="post" class="inline-block float-right">
-                <button data-tippy-content="Delete Task" class="mr-3 text-slate-700"><i
+            {% if task.important is True %}
+            <a href="#" class="text-[8px] font-medium px-3 py-2 rounded-full bg-red-600 text-white">Important</a>
+            {% endif %}
+            <form action="{% url 'core:delete-task-url' task.id %}" method="post" class="inline-block float-right">
+                {% csrf_token %}
+                <button type="submit" data-tippy-content="Delete Task" class="text-slate-700"><i
                         class="fa-solid fa-trash"></i></button>
             </form>
+            <button data-tippy-content="Edit task" class="btnEditTask float-right mx-3 text-slate-700"><i
+                    class="fa-solid fa-pen-to-square"></i></button>
+            <button data-tippy-content="Done" class="btnDoneTask float-right text-green-500"
+                data-btn-id="{{task.id}}"><i class="fa-solid fa-circle-check"></i></button>
         </div>
-        <h3 class="text-lg font-semibold my-5 text-slate-700">{{task.title}}</h3>
+        <h3 id="title_{{task.id}}" class="text-lg font-semibold my-5 text-slate-700">{{task.title}}</h3>
         <p class="text-sm">{{task.description}}</p>
     </div>
     {% endfor %}

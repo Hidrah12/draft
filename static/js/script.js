@@ -52,3 +52,19 @@ Array.from(btnEditTask).map(btn => {
         e.preventDefault();
     });
 });
+let btnDoneTask = document.getElementsByClassName("btnDoneTask");
+Array.from(btnDoneTask).map((btn) => {
+    btn.addEventListener("click", (e) => {
+        let taskTitle = document.getElementById(`title_${btn.getAttribute("data-btn-id")}`);
+        if (taskTitle) {
+            taskTitle.classList.add("line-through");
+            setInterval(function () {
+                let task = document.getElementById(`task_${btn.getAttribute("data-btn-id")}`);
+                if (task) {
+                    task.remove();
+                }
+            }, 5000);
+        }
+        e.preventDefault();
+    });
+});
