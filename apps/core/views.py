@@ -29,3 +29,9 @@ def index(request):
         tasks = Task.objects.all().order_by('-id')
 
     return render(request, 'core/index.html', {'task_form': task_form, 'tasks': tasks})
+
+def delete_task(request, id):
+    task = Task.objects.filter(id=id).first()
+    if task:
+        task.delete()
+    return redirect('core:index-url')
